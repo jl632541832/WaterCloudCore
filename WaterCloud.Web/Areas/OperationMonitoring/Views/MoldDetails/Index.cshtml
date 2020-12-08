@@ -149,12 +149,12 @@
     }
 </style>
 <script>
-    layui.use(['jquery', 'form', 'table', 'common', 'tablePlug', "layer", 'echarts', 'element', 'laydate'], function () {
+    layui.use(['jquery', 'form', 'table', 'common', 'optimizeSelectOption', "echarts", 'commonTable', 'element', 'laydate'], function () {
         var $ = layui.jquery,
             form = layui.form,
             table = layui.table,
             common = layui.common,
-            layer = layui.layer,
+            commonTable = layui.commonTable,
             echarts = layui.echarts,
             element = layui.element,
             laydate = layui.laydate;
@@ -622,11 +622,11 @@
             });
         }
         function gridList() {
-            common.rendertable({
+            commonTable.rendertable({
                 elem: '#currentTableId',
                 id: 'currentTableId',
                 url: "/OperationMonitoring/MoldDetails/GetGridJson",
-                height: 220,
+                height: 330,
                 toolbar: false,/*隐藏打印*/
                 page: true,/*隐藏分页*/
                 sqlkey: 'id',//数据库主键
@@ -647,7 +647,9 @@
                     },
                     { field: 'DaysOfExtension', title: '延期天数', width: 110, sort: true },
                     { field: 'OrderStatus', title: '状态', width: 80, sort: true },
-                ]]
+                ]], filter: {
+                    bottom: false
+                }
             });
         }
         function loadFour() {
@@ -793,7 +795,7 @@
                         @*<button type="button" id="funOne" style="border: none;float: right;" class="layui-btn layui-btn-primary"><i class="fa fa-expand icon"></i></button>*@
                     </div>
                     <div class="layui-card-body layui-text">
-                        <div id="chart1" style="height:240px;"></div>
+                        <div id="chart1" style="height:300px;"></div>
                     </div>
                 </div>
             </div>
@@ -809,7 +811,7 @@
                         </div>
                     </div>
                     <div class="layui-card-body layui-text">
-                        <div id="chart2" style="height:240px;"></div>
+                        <div id="chart2" style="height:300px;"></div>
                     </div>
                 </div>
             </div>
@@ -821,7 +823,7 @@
                     </div>
                     <div class="layui-card-body layui-text">
                         <div style="float:left;width:40%">
-                            <div id="chart3" style="height:240px;"></div>
+                            <div id="chart3" style="height:350px;"></div>
                         </div>
                         <div style="margin-left:40%;">
                             <table class="layui-hide" id="currentTableId" lay-filter="currentTableFilter"></table>
@@ -841,7 +843,7 @@
                         </div>
                     </div>
                     <div class="layui-card-body layui-text">
-                        <div id="chart4" style="height:240px;"></div>
+                        <div id="chart4" style="height:350px;"></div>
                     </div>
                 </div>
             </div>

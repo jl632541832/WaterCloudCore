@@ -146,14 +146,12 @@
 <script src="~/js/lay-module/d3/d3.js"></script>
 <script src="~/js/lay-module/d3/d3.layout.cloud.js"></script>
 <script>
-    layui.use(['jquery', 'form', 'table', 'common', 'tablePlug', "layer", 'element'], function () {
-        var $ = layui.jquery,
+    layui.use(['commonTable', 'form', 'table', 'common', 'optimizeSelectOption', 'element'], function () {
+        var commonTable = layui.commonTable,
             form = layui.form,
             table = layui.table,
             common = layui.common,
-            layer = layui.layer,
-            //echarts = layui.echarts,
-            element = layui.element;;
+            element = layui.element;
         wcLoading.close();
         // toolbarDemo.innerHTML = common.authorizeButtonNew(toolbarDemo.innerHTML);
 
@@ -582,7 +580,7 @@
             });
         }
         function gridList() {
-            common.rendertable({
+            commonTable.rendertable({
                 elem: '#currentTableId',
                 id: 'currentTableId',
                 url: '/OperationMonitoring/BusinessOverview/GetGridJson',
@@ -592,11 +590,11 @@
                 sqlkey: 'id',//数据库主键
                 cols: [[
                     { field: 'id', title: 'ID', sort: true, hide: true, hideAlways: true },
-                    { field: 'MoldNo', title: '模具编号', width: 100, sort: true },
-                    { field: 'MoldTest', title: '试模', width: 80, sort: true, filter: true },
-                    { field: 'Type', title: '类型', width: 70, sort: true },
-                    { field: 'State', title: '状态', width: 80, sort: true },
-                    { field: 'ProductName', title: '产品名称', width: 80, sort: true },
+                    { field: 'MoldNo', title: '模具编号', width: 150, sort: true },
+                    { field: 'MoldTest', title: '试模', width: 110, sort: true, filter: true },
+                    { field: 'Type', title: '类型', width: 110, sort: true },
+                    { field: 'State', title: '状态', width: 100, sort: true },
+                    { field: 'ProductName', title: '产品名称', width: 110, sort: true },
                     {
                         field: 'PlannedDeliveryDate', title: '计划交期', width: 105,
                         templet: function (d) {
@@ -607,7 +605,7 @@
                         }
                     },
                     {
-                        field: 'EarlyWarning', title: '预警', align: 'center', width: 80,
+                        field: 'EarlyWarning', title: '预警', align: 'center', width: 100,
                         templet: function (d) {
                             if (d.EarlyWarning) {
                                 var temp = ''
@@ -629,6 +627,9 @@
                 , done: function (res, currentCount) {
                     //***重点***：table渲染完成后渲染element进度条
                     element.render()
+                }
+                , filter: {
+                    bottom: false
                 }
             });
         }
@@ -952,7 +953,7 @@
             }
             );
 
-            option = {
+            var option = {
                 backgroundColor: 'transparent',
                 tooltip: {
                     trigger: 'item',
@@ -983,7 +984,7 @@
                 series: series
             };
             myChart.setOption(option);
-            window.addEventListener = echart.resize;
+            //window.addEventListener = echart.resize;
             function resize(width, height) {
                 var chart = document.getElementById('chart4b');
                 chart.style.width = width + "px";
