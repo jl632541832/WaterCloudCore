@@ -203,6 +203,7 @@
                         var str3 = new Object();
                         str3.name = item.Name;
                         str3.value = item.Cost;
+                        str3.url = "/Home/Index#//AutomationLine/RunningState/Index";//"https://www.baidu.com/";
                         str[index] = str3;
                         TotalCost += item.Cost;
                     })
@@ -312,6 +313,14 @@
                 ]
             };
             myChart.setOption(option);
+            //点击事件
+            myChart.on('click', function (params) {
+                console.log(params);
+                var name = params.name;
+                //window.open('https://www.baidu.com/s?ie=UTF-8&wd=' + name);
+
+                window.open(params.data.url);
+            });
             // echarts 窗口缩放自适应
             window.addEventListener("resize", function () {
                 myChart.resize();
@@ -590,13 +599,13 @@
                 sqlkey: 'id',//数据库主键
                 cols: [[
                     { field: 'id', title: 'ID', sort: true, hide: true, hideAlways: true },
-                    { field: 'MoldNo', title: '模具编号', width: 150, sort: true },
-                    { field: 'MoldTest', title: '试模', width: 110, sort: true, filter: true },
-                    { field: 'Type', title: '类型', width: 110, sort: true },
-                    { field: 'State', title: '状态', width: 100, sort: true },
+                    { field: 'MoldNo', title: '模具编号',  sort: true },
+                    { field: 'MoldTest', title: '试模',  sort: true, filter: true },
+                    { field: 'Type', title: '类型',  sort: true },
+                    { field: 'State', title: '状态',  sort: true },
                     { field: 'ProductName', title: '产品名称', width: 110, sort: true },
                     {
-                        field: 'PlannedDeliveryDate', title: '计划交期', width: 105,
+                        field: 'PlannedDeliveryDate', title: '计划交期', 
                         templet: function (d) {
                             if (d.PlannedDeliveryDate) {
                                 return new Date(d.PlannedDeliveryDate).Format("yyyy-MM-dd");
@@ -605,7 +614,7 @@
                         }
                     },
                     {
-                        field: 'EarlyWarning', title: '预警', align: 'center', width: 100,
+                        field: 'EarlyWarning', title: '预警', align: 'center', 
                         templet: function (d) {
                             if (d.EarlyWarning) {
                                 var temp = ''
@@ -659,10 +668,15 @@
             $.each(listDeviceName, function (index, value) {
                 var tempName = new Array();
                 var tempArry = new Array();
+                var tempNew = new Array();
                 $.each(listAll, function (index1, value1) {
+                    var tempold = {};
                     if (value == value1.DeviceName) {
                         tempName = value1.DeviceName;
                         tempArry.push(value1.Number);
+                        tempold.value = value1.Number;
+                        tempold.url = "/Home/Index#//OperationMonitoring/BusinessOverview/Form4";//"https://www.baidu.com/";
+                        tempNew.push(tempold);
                     }
                 });
                 series.push({
@@ -670,7 +684,7 @@
                     type: 'bar',
                     barWidth: '15%',
                     barGap: '80%',
-                    data: tempArry,
+                    data: tempNew,
                     itemStyle: {
                         normal: {
                             label: {
@@ -771,6 +785,14 @@
                 series: series
             };
             myChart.setOption(option, true);
+            //点击事件
+            myChart.on('click', function (params) {
+                console.log(params);
+                var name = params.name;
+                //window.open('https://www.baidu.com/s?ie=UTF-8&wd=' + name);
+
+                window.open(params.data.url);
+            });
             // echarts 窗口缩放自适应
             window.addEventListener("resize", function () {
                 myChart.resize();
@@ -1335,18 +1357,24 @@
             $.each(listDeviceName, function (index, value) {
                 var tempName = new Array();
                 var tempArry = new Array();
+                var tempNew = new Array();
                 $.each(listAll, function (index1, value1) {
+                    var tempold = {};
                     if (value == value1.DeviceName) {
                         tempName = value1.DeviceName;
                         tempArry.push(value1.Number);
+                        tempold.value = value1.Number;
+                        tempold.url = "/Home/Index#//OperationMonitoring/BusinessOverview/Form4";//"https://www.baidu.com/";
+                        tempNew.push(tempold);
                     }
                 });
+                //var qq = JSON.parse(JSON.stringify(tempNew));
                 series.push({
                     name: tempName,
                     type: 'bar',
                     barWidth: '15%',
                     barGap: '80%',
-                    data: tempArry,
+                    data: tempNew,//tempArry,
                     itemStyle: {
                         normal: {
                             label: {
@@ -1454,6 +1482,15 @@
                 series: series
             };
             myChart.setOption(option, true);
+            //点击事件
+            myChart.on('click', function (params) {
+                console.log(params);
+                var name = params.name;
+                //window.open('https://www.baidu.com/s?ie=UTF-8&wd=' + name);
+
+                window.open(params.data.url);
+            });
+
             // echarts 窗口缩放自适应
             window.addEventListener("resize", function () {
                 myChart.resize();
